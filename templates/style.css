@@ -5,12 +5,20 @@
 	top: 0px;
 	left: 0px;
 	background: transparent url(pattern.png) repeat top left;
-	z-index:30;
+	z-index:1;
 }
 
 .imagem{
-	z-index:10;
+	z-index:0;
 	position: fixed;
 	top: 0px;
 	left: 0px;
+}
+
+.map{
+	width:500px;
+	height:700px;
+	z-index:2;
+	margin-left: auto;
+	margin-right: auto;	
 }
