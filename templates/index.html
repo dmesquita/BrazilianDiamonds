@@ -1,3 +1,9 @@
+{% load url from future %}
+{% load static from staticfiles %}
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href={{ STATIC_URL }}style.css />
+
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -8,8 +14,7 @@
         <meta name="description" content="Brazilian Diamonds - Mapa com fãs da Marina and The Diamonds pelo Brazil" />
         <meta name="keywords" content="Marina, Diamonds, Brazil, Brasil, fãs" />
         <meta name="author" content="Déborah Mesquita" />
-        <link rel="shortcut icon" href="../favicon.ico">         
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="shortcut icon" href="../favicon.ico">
         <link href='http://fonts.googleapis.com/css?family=Miltonian|Bitter' rel='stylesheet' type='text/css' />
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBq5Gy6QCtfK3TUMPqRUm2OdOugViKWMZs&sensor=false">
         </script>
@@ -42,7 +47,7 @@
         </script>
     </head>
     <body>
-        <img class="imagem" src="image.jpg">
+        <img class="imagem" src={{ STATIC_URL }}images/image.jpg />
 		<div class="bg"></div>
         <div id="googleMap" class="map"></div>
     </body>

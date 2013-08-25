@@ -4,7 +4,7 @@
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	background: transparent url(pattern.png) repeat top left;
+	background: transparent url(images/pattern.png) repeat top left;
 	z-index:1;
 }
 
