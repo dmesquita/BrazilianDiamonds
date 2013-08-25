@@ -7,7 +7,7 @@ class PointOfInterest(models.Model):
 	name = models.CharField(max_length=100)
 	position = GeopositionField()
 	def __unicode__(self):
-		return self.name
+		return str(self.position)
 
 class Marker(models.Model):
 	name = models.ForeignKey(PointOfInterest)

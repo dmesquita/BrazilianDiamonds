@@ -33,9 +33,8 @@
 			
 			{% if results %}
 				{% for result in results %}
-					alert("{{ result.name }}");
-					//new google.maps.Marker({ position: new google.maps.LatLng(result), });
-					//marker.setMap(map);
+					marker = new google.maps.Marker({ position: new google.maps.LatLng({{ result.position.latitude }}, {{ result.position.longitude }}) });
+					marker.setMap(map);
 				{% endfor %}
 			{% endif %}	
 			
