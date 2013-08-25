@@ -10,6 +10,6 @@ from diamondslocation.models import Marker, PointOfInterest
 def index(request):
 	template = loader.get_template('index.html')
 	context = RequestContext(request)
-	results = Marker.objects.all()
+	results = PointOfInterest.objects.all()
 	"""return HttpResponse(template.render(context))"""
 	return render_to_response('index.html', {"results": results,}, context_instance=context)

@@ -33,7 +33,7 @@
 			
 			{% if results %}
 				{% for result in results %}
-					alert({{ result.name }});
+					alert("{{ result.name }}");
 					//new google.maps.Marker({ position: new google.maps.LatLng(result), });
 					//marker.setMap(map);
 				{% endfor %}
