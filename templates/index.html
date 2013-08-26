@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <title>Fullscreen Image Blur Effect with HTML5</title>
+        <title>Brazilian Diamonds</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -15,7 +15,7 @@
         <meta name="keywords" content="Marina, Diamonds, Brazil, Brasil, fãs" />
         <meta name="author" content="Déborah Mesquita" />
         <link rel="shortcut icon" href="../favicon.ico">
-        <link href='http://fonts.googleapis.com/css?family=Miltonian|Bitter' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'>
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBq5Gy6QCtfK3TUMPqRUm2OdOugViKWMZs&sensor=false">
         </script>
         <script>
@@ -49,7 +49,10 @@
         </script>
     </head>
     <body>
-        <img class="imagem" src={{ STATIC_URL }}images/image.jpg />
+		<div id="logo">
+			<img id="diamonds" src={{ STATIC_URL }}images/logo.png />	
+		</div>				
+		<img class="imagem" src={{ STATIC_URL }}images/image.jpg />		
 		<div class="bg"></div>
         <div id="googleMap" class="map"></div>        	
     </body>
