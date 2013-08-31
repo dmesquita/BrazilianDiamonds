@@ -36,10 +36,11 @@
 			
             //Adiciona marcador ao clicar no mapa
             google.maps.event.addListener(map, 'click', function(event){ placeMarker(event.latLng); });
+				content_string='Oi!'
 				function placeMarker(location) {
 					var marker = new google.maps.Marker({position: location,
-					map: map,});
-					var infowindow = new google.maps.InfoWindow({content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() });
+					map: map,  icon:'{{ STATIC_URL }}images/diamond.png' });
+					var infowindow = new google.maps.InfoWindow({content: location.lat()+" "+location.lng() });
 					infowindow.open(map,marker);
             }
             
@@ -58,7 +59,17 @@
 		<div id="content">
 			<h3>Clique no mapa para adicionar seu diamante!</h3>
 			<div id="googleMap" class="map"></div>     
-			<a href=#>Sobre</a> 
+			<a href=#>Sobre</a>
+			
+			<h1>Adicionar Marcador</h1>
+				<form action="{% url 'form' %}" method="post">
+					 {% csrf_token %}
+					 Nome<input type="text" name="nome"/>
+					 Email<input type="email" name="email (não será publicado)"/>
+					 Mensagem<textarea name="mensagem" cols="25" rows="5"></textarea>
+					 Twitter<input type="text" name="Twitter, facebook etc"/>
+					 <input type="submit" value="Enviar"/>
+				</form>
         </div>  	
     </body>
     
