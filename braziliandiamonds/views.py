@@ -13,9 +13,7 @@ def index(request):
 	results = Marker.objects.all()	
 	return render_to_response('index.html', {"results": results,}, context_instance=context)
 	
-def form(request):
-	marcador = Marker("doform",localization) 
-	marcador.save()
+def form(request):	
 	return HttpResponseRedirect(reverse('index.html'))
 	
 def addmarker(request):

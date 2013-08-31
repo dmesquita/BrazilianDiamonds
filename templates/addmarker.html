@@ -19,6 +19,7 @@
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBq5Gy6QCtfK3TUMPqRUm2OdOugViKWMZs&sensor=false">
         </script>
         <script>
+			document.getElementById('id_position_0').value = localStorage["lat"];
 		function initialize(){
             var mapProp = { center:new google.maps.LatLng(-9.882275,-49.21875), zoom:4, mapTypeId:google.maps.MapTypeId.ROADMAP};
             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
@@ -26,31 +27,15 @@
 			var content_string = '<div id="content"><h3><bold>Nome</bold>:</h3><h1>{{ result.name }}</h1></div>';
 			var infowindow = new google.maps.InfoWindow({ content:content_string });
 			
+			
 			//Adiciona os marcadores armazenados no bd
 			{% if results %}
 				{% for result in results %}
 					marker = new google.maps.Marker({ position: new google.maps.LatLng({{ result.position.latitude }}, {{ result.position.longitude }}), icon:'{{ STATIC_URL }}images/diamond.png' });
 					marker.setMap(map);
 				{% endfor %}
-			{% endif %}	
-			
-            //Adiciona marcador ao clicar no mapa
-            google.maps.event.addListener(map, 'click', function(event){ placeMarker(event.latLng); });
-				content_string="<h5>Add Contact</h5>"+
-				"{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}"+
-				"<form action='addmarker'"+ 
-				"method='post'>"+
-				"{% csrf_token %}"+
-				"<table>{{ contact_form.as_table }}</table>"+
-				"<input type='submit'value='Save' /></form>";
-				
-				function placeMarker(location) {
-					var marker = new google.maps.Marker({position: location,
-					map: map,  icon:'{{ STATIC_URL }}images/diamond.png' });
-					//var infowindow = new google.maps.InfoWindow({content: location.lat()+" "+location.lng() });
-					var infowindow = new google.maps.InfoWindow({content: content_string });
-					infowindow.open(map,marker);
-            }
+			{% endif %}			
+               
             
             //Mostra as informações ao clicar em um marcador
             google.maps.event.addListener(marker, 'click', function() {  infowindow.open(map,marker);});
@@ -66,9 +51,8 @@
 		<div class="bg"></div>
 		<div id="content">			
 			<div id="form">
-				<h1>Add Contact</h1>
-				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
+				<h1>Adicionar marcador</h1>
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}				
 				<form action="addmarker" method="post">
 				{% csrf_token %}
 				<table>
