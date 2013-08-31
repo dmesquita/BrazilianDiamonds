@@ -1,5 +1,4 @@
 from django.contrib import admin
-from diamondslocation.models import Marker, PointOfInterest
+from diamondslocation.models import Marker
 
 admin.site.register(Marker)
-admin.site.register(PointOfInterest)

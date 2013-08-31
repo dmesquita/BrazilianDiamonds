@@ -36,11 +36,19 @@
 			
             //Adiciona marcador ao clicar no mapa
             google.maps.event.addListener(map, 'click', function(event){ placeMarker(event.latLng); });
-				content_string='Oi!'
+				content_string="<h5>Add Contact</h5>"+
+				"{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}"+
+				"<form action='addmarker'"+ 
+				"method='post'>"+
+				"{% csrf_token %}"+
+				"<table>{{ contact_form.as_table }}</table>"+
+				"<input type='submit'value='Save' /></form>";
+				
 				function placeMarker(location) {
 					var marker = new google.maps.Marker({position: location,
 					map: map,  icon:'{{ STATIC_URL }}images/diamond.png' });
-					var infowindow = new google.maps.InfoWindow({content: location.lat()+" "+location.lng() });
+					//var infowindow = new google.maps.InfoWindow({content: location.lat()+" "+location.lng() });
+					var infowindow = new google.maps.InfoWindow({content: content_string });
 					infowindow.open(map,marker);
             }
             
@@ -61,15 +69,7 @@
 			<div id="googleMap" class="map"></div>     
 			<a href=#>Sobre</a>
 			
-			<h1>Adicionar Marcador</h1>
-				<form action="{% url 'form' %}" method="post">
-					 {% csrf_token %}
-					 Nome<input type="text" name="nome"/>
-					 Email<input type="email" name="email (não será publicado)"/>
-					 Mensagem<textarea name="mensagem" cols="25" rows="5"></textarea>
-					 Twitter<input type="text" name="Twitter, facebook etc"/>
-					 <input type="submit" value="Enviar"/>
-				</form>
+		
         </div>  	
     </body>
     

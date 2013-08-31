@@ -5,22 +5,21 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import RequestContext, loader
 
-from diamondslocation.models import Marker, PointOfInterest
-from diamondslocation.models import MarkerForm, PointOfInterestForm
+from diamondslocation.models import Marker, MarkerForm
 
 def index(request):
 	template = loader.get_template('index.html')
 	context = RequestContext(request)
-	results = PointOfInterest.objects.all()	
+	results = Marker.objects.all()	
 	return render_to_response('index.html', {"results": results,}, context_instance=context)
 	
 def form(request):
-	marcador = PointOfInterest("doform",localization) 
+	marcador = Marker("doform",localization) 
 	marcador.save()
 	return HttpResponseRedirect(reverse('index.html'))
 	
 def addmarker(request):
-	form = PointOfInterestForm(request.POST or None)
+	form = MarkerForm(request.POST or None)
 	if form.is_valid():
 		fmodel = form.save()
 		fmodel.save()
