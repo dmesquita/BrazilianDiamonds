@@ -36,13 +36,7 @@
 			
             //Adiciona marcador ao clicar no mapa
             google.maps.event.addListener(map, 'click', function(event){ placeMarker(event.latLng); });
-				content_string="<h5>Add Contact</h5>"+
-				"{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}"+
-				"<form action='addmarker'"+ 
-				"method='post'>"+
-				"{% csrf_token %}"+
-				"<table>{{ contact_form.as_table }}</table>"+
-				"<input type='submit'value='Save' /></form>";
+				content_string= "<a href='addmarker'>Adicionar marcador aqui!</a>";
 				
 				function placeMarker(location) {
 					var marker = new google.maps.Marker({position: location,
