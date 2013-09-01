@@ -42,10 +42,12 @@
 				//Adiciona os marcadores armazenados no bd
 				{% if results %}
 					{% for result in results %}
-						if(localStorage["lat"].toString() == {{ result.position.latitude }} && localStorage["lng"].toString() == {{ result.position.longitude }} ){
-							iconLink = '{{ STATIC_URL }}images/diamond_vermelho.png';	
-						}else{						
-							iconLink = '{{ STATIC_URL }}images/diamond_branco.png';					
+						if(localStorage["lat"] && localStorage["lng"]){
+							if(localStorage["lat"].toString() == {{ result.position.latitude }} && localStorage["lng"].toString() == {{ result.position.longitude }} ){
+								iconLink = '{{ STATIC_URL }}images/diamond_vermelho.png';	
+							};
+						}else{
+							iconLink = '{{ STATIC_URL }}images/diamond_branco.png';		
 						};
 						marker = new google.maps.Marker({ position: new google.maps.LatLng({{ result.position.latitude }}, {{ result.position.longitude }}), icon: iconLink,title:'{{ result.name }}' });
 						marker.setMap(map);
