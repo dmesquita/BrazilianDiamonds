@@ -45,6 +45,8 @@
 						if(localStorage["lat"] && localStorage["lng"]){
 							if(localStorage["lat"].toString() == {{ result.position.latitude }} && localStorage["lng"].toString() == {{ result.position.longitude }} ){
 								iconLink = '{{ STATIC_URL }}images/diamond_vermelho.png';	
+							}else{
+								iconLink = '{{ STATIC_URL }}images/diamond_branco.png';		
 							};
 						}else{
 							iconLink = '{{ STATIC_URL }}images/diamond_branco.png';		
