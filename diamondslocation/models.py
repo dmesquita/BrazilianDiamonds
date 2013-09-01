@@ -19,10 +19,10 @@ class Marker(models.Model):
 		return self.name
 		
 class MarkerForm(forms.ModelForm):
-	name = forms.CharField(widget=forms.TextInput(attrs={'size':'40'}), label='Nome')
-	email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': '(Nao sera publicado)','size':'40'}))
-	message = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Quer dizer algo aos diamonds? (opcional)','size':'40'}), label='Mensagem')
-	link = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Twitter, facebook, etc (opcional)','size':'40'}))
+	name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'obrigatorio','size':'40'}), label='Nome')
+	email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'obrigatorio (Nao sera publicado)','size':'40'}))
+	message = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Quer dizer algo aos diamonds? (opcional)','size':'40'}), label='Mensagem',required=False)
+	link = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Twitter, facebook, etc (opcional)','size':'40'}), label='Links', required=False)
 	class Meta:
 		model = Marker		
 

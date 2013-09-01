@@ -16,6 +16,7 @@
         <meta name="author" content="Déborah Mesquita" />
         <link rel="shortcut icon" href="../favicon.ico">
         <link href='http://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Glass+Antiqua|Port+Lligat+Slab' rel='stylesheet' type='text/css'>
         <script src="http://code.jquery.com/jquery-latest.min.js"
         type="text/javascript"></script>
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBq5Gy6QCtfK3TUMPqRUm2OdOugViKWMZs&sensor=false">
@@ -25,29 +26,7 @@
 				document.getElementById("id_position_0").value = localStorage["lat"];
 				document.getElementById("id_position_1").value = localStorage["lng"];				
 				$("table tr:first").hide();				
-			});
-			
-		function initialize(){
-            var mapProp = { center:new google.maps.LatLng(-9.882275,-49.21875), zoom:4, mapTypeId:google.maps.MapTypeId.ROADMAP};
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-            var marker;
-			var content_string = '<div id="content"><h3><bold>Nome</bold>:</h3><h1>{{ result.name }}</h1></div>';
-			var infowindow = new google.maps.InfoWindow({ content:content_string });
-			
-			
-			//Adiciona os marcadores armazenados no bd
-			{% if results %}
-				{% for result in results %}
-					marker = new google.maps.Marker({ position: new google.maps.LatLng({{ result.position.latitude }}, {{ result.position.longitude }}), icon:'{{ STATIC_URL }}images/diamond.png' });
-					marker.setMap(map);
-				{% endfor %}
-			{% endif %}			
-               
-            
-            //Mostra as informações ao clicar em um marcador
-            google.maps.event.addListener(marker, 'click', function() {  infowindow.open(map,marker);});
-        }
-            google.maps.event.addDomListener(window, 'load', initialize);            
+			});		        
         </script>
     </head>
     <body>
@@ -58,7 +37,7 @@
 		<div class="bg"></div>
 		<div id="content">			
 			<div id="form">
-				<h1>Adicionar diamante</h1>
+				<h3>Adicionar diamante</h3>
 				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}				
 				<form action="addmarker" method="post">
 				{% csrf_token %}
@@ -67,8 +46,7 @@
 				</table>
 				<input type="submit" value="Enviar" />
 				</form>
-			</div>     
-			<a href=#>Sobre</a>		
+			</div>  	
         </div>  	
     </body>
     

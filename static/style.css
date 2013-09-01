@@ -70,3 +70,34 @@ h1{
 	position: relative;
 	margin-left:-270px;
 }
+
+h3{
+	font-family: 'Port Lligat Slab', Arial;
+	font-size: 1.4em;
+	text-align: center;
+	color: #323637;
+}
+
+a{
+	font-weight: bold;
+	font-size: 1.4em;
+	color: #2A5DB0;		
+ }
+
+#footer{
+	text-align: center;
+}
+
+label{
+	font-family: 'Port Lligat Slab', Arial;
+}
+
+
+form{
+    width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+    text-align: center; 
+  }
+
+
