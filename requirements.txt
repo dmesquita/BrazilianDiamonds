@@ -4,3 +4,4 @@ distribute==0.6.24
 django-geoposition==0.1.4
 psycopg2==2.5.1
 wsgiref==0.1.2
+gunicorn==17.5
