@@ -7,10 +7,10 @@ from django import forms
 
 class Marker(models.Model):	
 	position = GeopositionField()	
-	name = models.CharField(max_length=50)
-	email = models.CharField(max_length=200)
-	message = models.CharField(max_length=200)
-	link = models.CharField(max_length=200)
+	name = models.CharField(max_length=50,blank=False)
+	email = models.EmailField(max_length=75,blank=False)
+	message = models.CharField(max_length=200,blank=True)
+	link = models.CharField(max_length=200,blank=True)
 	
 	def __unicode__(self):
 		return str(self.position)
@@ -19,7 +19,10 @@ class Marker(models.Model):
 		return self.name
 		
 class MarkerForm(forms.ModelForm):
-	link = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Twitter, facebook, etc','size':'40'}))
+	name = forms.CharField(widget=forms.TextInput(attrs={'size':'40'}), label='Nome')
+	email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': '(Nao sera publicado)','size':'40'}))
+	message = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Quer dizer algo aos diamonds? (opcional)','size':'40'}), label='Mensagem')
+	link = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Twitter, facebook, etc (opcional)','size':'40'}))
 	class Meta:
 		model = Marker		
 
