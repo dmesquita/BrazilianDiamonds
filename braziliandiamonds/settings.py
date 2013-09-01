@@ -1,5 +1,6 @@
 # Django settings for braziliandiamonds project.
 import dj_database_url
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -25,7 +26,7 @@ DATABASES = {'default': dj_database_url.config()}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://immense-earth-3836.herokuapp.com/']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -69,7 +70,6 @@ STATIC_ROOT = 'staticfiles'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Additional locations of static files
