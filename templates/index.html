@@ -20,48 +20,55 @@
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBq5Gy6QCtfK3TUMPqRUm2OdOugViKWMZs&sensor=false">
         </script>
         <script>
-		function addInfoWindow(infoWindow, map, marker){
-			google.maps.event.addListener(marker, 'click', function () { infoWindow.open(map, marker);});
-		};	
+			//Função para adicionar o evento da infoWindows a cada marcador
+			function addInfoWindow(infoWindow, map, marker){
+				google.maps.event.addListener(marker, 'click', function () { infoWindow.open(map, marker);});
+			};	
 			
-		function initialize(){
-            var mapProp = { center:new google.maps.LatLng(-9.882275,-49.21875), zoom:4, mapTypeId:google.maps.MapTypeId.ROADMAP};
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-            var marker;			
-			var infowindow = null;
-			var info = null;
-			
-			
-			//Adiciona os marcadores armazenados no bd
-			{% if results %}
-				{% for result in results %}
-					marker = new google.maps.Marker({ position: new google.maps.LatLng({{ result.position.latitude }}, {{ result.position.longitude }}), icon:'{{ STATIC_URL }}images/diamond.png',title:'{{ result.name }}' });
-					marker.setMap(map);
-					info = "<h4>Nome: {{ result.name }}</h4><h4>Mensagem: {{ result.message }}</h4><h4>Links: {{ result.link }}</h4>";					
-					infoWindow = new google.maps.InfoWindow({	content: info	});
-					addInfoWindow(infoWindow,map,marker);					
-				{% endfor %}
-			{% endif %}	
-			
-            //Adiciona marcador ao clicar no mapa
-            google.maps.event.addListener(map, 'click', function(event){ placeMarker(event.latLng); });
-				content_string= "<a href='addmarker' style='color:green'>Adicionar marcador aqui!</a> ou <a href='/' style='color:red'>Apagar marcador</a>";
+			function Sobre() {
+				var answer = alert("Brazilian Diamonds v1.0 \n © Copyright by Déborah Mesquita")
 				
-				function placeMarker(location) {
-					//content_string= "<form action='{% url 'addmarker' %}'<input type='text' name='latitude' value='"+location.lat()+"'/><input type='submit' value='Adicionar marcador aqui!'/></form>";
-					localStorage["lat"] = location.lat();
-					localStorage["lng"] = location.lng(); 
-					var marker = new google.maps.Marker({position: location,
-					map: map,  icon:'{{ STATIC_URL }}images/diamond.png' });
-					//var infowindow = new google.maps.InfoWindow({content: location.lat()+" "+location.lng() });
-					var infowindow = new google.maps.InfoWindow({content: content_string });
-					infowindow.open(map,marker);
-            }
-            
-            //Mostra as informações ao clicar em um marcador
-            //google.maps.event.addListener(marker, 'click', function() {  infowindow.open(map,marker);});
-        }
-            google.maps.event.addDomListener(window, 'load', initialize);            
+			};
+				
+			function initialize(){
+				var mapProp = { center:new google.maps.LatLng(-9.882275,-49.21875), zoom:4, mapTypeId:google.maps.MapTypeId.ROADMAP};
+				var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+				var marker;			
+				var infowindow = null;
+				var info = null;
+				var iconLink = null;
+				
+				
+				//Adiciona os marcadores armazenados no bd
+				{% if results %}
+					{% for result in results %}
+						if(localStorage["lat"].toString() == {{ result.position.latitude }} && localStorage["lng"].toString() == {{ result.position.longitude }} ){
+							iconLink = '{{ STATIC_URL }}images/diamond_vermelho.png';	
+						}else{						
+							iconLink = '{{ STATIC_URL }}images/diamond_branco.png';					
+						};
+						marker = new google.maps.Marker({ position: new google.maps.LatLng({{ result.position.latitude }}, {{ result.position.longitude }}), icon: iconLink,title:'{{ result.name }}' });
+						marker.setMap(map);
+						info = "<h4>Nome: {{ result.name }}</h4><h4>Mensagem: {{ result.message }}</h4><h4>Links: {{ result.link }}</h4>";					
+						infoWindow = new google.maps.InfoWindow({	content: info	});
+						addInfoWindow(infoWindow,map,marker);					
+					{% endfor %}
+				{% endif %}	
+				
+				//Adiciona marcador ao clicar no mapa
+				google.maps.event.addListener(map, 'click', function(event){ placeMarker(event.latLng); });
+					content_string= "<a href='addmarker' style='color:green'>Adicionar marcador aqui!</a> ou <a href='/' style='color:red'>Apagar marcador</a>";
+					
+					function placeMarker(location) {					
+						localStorage["lat"] = location.lat();
+						localStorage["lng"] = location.lng(); 
+						var marker = new google.maps.Marker({position: location,
+						map: map,  icon:'{{ STATIC_URL }}images/diamond_verde.png' });					
+						var infowindow = new google.maps.InfoWindow({content: content_string });
+						infowindow.open(map,marker);
+				}           
+			}
+				google.maps.event.addDomListener(window, 'load', initialize);            
         </script>
     </head>
     <body>
@@ -74,7 +81,7 @@
 			<h3>Clique no mapa para adicionar seu diamante!</h3>
 			<div id="googleMap" class="map"></div>
 				<div id="footer">
-					<a href=#>Sobre</a>	
+					<a href="javascript:Sobre();">Sobre</a>	
 				</div>			
         </div>  	
        

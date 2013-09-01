@@ -11,10 +11,7 @@ def index(request):
 	template = loader.get_template('index.html')
 	context = RequestContext(request)
 	results = Marker.objects.all()	
-	return render_to_response('index.html', {"results": results,}, context_instance=context)
-	
-def form(request):	
-	return HttpResponseRedirect(reverse('index.html'))
+	return render_to_response('index.html', {"results": results,}, context_instance=context)	
 	
 def addmarker(request):
 	form = MarkerForm(request.POST or None)

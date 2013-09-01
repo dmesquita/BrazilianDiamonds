@@ -8,7 +8,7 @@ from django import forms
 class Marker(models.Model):	
 	position = GeopositionField()	
 	name = models.CharField(max_length=50,blank=False)
-	email = models.EmailField(max_length=75,blank=False)	
+	email = models.EmailField(max_length=75,blank=False,primary_key=True)	
 	message = models.CharField(max_length=200,blank=True)
 	link = models.CharField(max_length=200,blank=True)
 	
