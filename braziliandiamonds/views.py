@@ -22,4 +22,20 @@ def addmarker(request):
 		
 	return render_to_response('addmarker.html',{'contact_form': form}, context_instance=RequestContext(request))
 	
+def editmarker(request):
+	instance = get_object_or_404(MarkerForm, email=email)
+	form = MarkerForm(request.POST or None, instance=instance)	
+	if form.is_valid():
+		fmodel = form.save()
+		fmolde.save()
+		return redirect(index)
+		
+	return render_to_response('editmarker.html',{'contact_form': form}, context_instance=RequestContext(request))
+	
+def email(request):
+	form = (request.POST or None)
+	if form:
+		#return redirect(index)
+		return render_to_response('addmarker.html',{'contact_form': form,'email':form}, context_instance=RequestContext(request))
+	return render_to_response('email.html',{'contact_form': form}, context_instance=RequestContext(request))
 
